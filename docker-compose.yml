@@ -76,7 +76,7 @@ services:
     php-fpm:
       build: phpdocker/php-fpm
       container_name: hospital-php-fpm
-      working_dir: /application/hospital
+      working_dir: /application
       volumes:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini

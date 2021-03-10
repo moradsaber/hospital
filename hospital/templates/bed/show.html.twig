@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bed{% endblock %}
+
+{% block body %}
+    <h1>Bed</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bed.id }}</td>
+            </tr>
+            <tr>
+                <th>Postion</th>
+                <td>{{ bed.postion }}</td>
+            </tr>
+            <tr>
+                <th>IsOperationel</th>
+                <td>{{ bed.isOperationel ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ bed.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bed_index') }}">back to list</a>
+
+    <a href="{{ path('bed_edit', {'id': bed.id}) }}">edit</a>
+
+    {{ include('bed/_delete_form.html.twig') }}
+{% endblock %}

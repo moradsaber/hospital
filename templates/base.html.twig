@@ -6,6 +6,12 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <style>
+            body{
+                font-size: 90%;
+            }
+        </style>
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
@@ -15,7 +21,9 @@
         {% endblock %}
     </head>
     <body>
-        <div class="container">
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <div class="container">
         {% block body %}{% endblock %}
         </div>
     </body>

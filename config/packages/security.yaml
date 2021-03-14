@@ -1,0 +1,37 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        from_database:
+            entity:
+                class: App\Entity\User
+                property: userName
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: true
+            logout:
+                path: /logout
+                target: /login
+
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: /hospital
+                always_use_default_target_path: true
+
+    role_hierarchy:
+        ROLE_USER:        ROLE_USER
+        ROLE_EDITOR:      ROLE_USER
+        ROLE_ADMIN:       ROLE_EDITOR
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_EDITOR, ROLE_ADMIN]
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/user, roles: ["ROLE_ADMIN"] }

@@ -2,3 +2,57 @@
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+{% block javascripts %}
+
+<script>
+    $(document).ready(function () {
+        console.log("here");
+     /*   $.post( "{{ path('reservation_Avalaible_Beds') }}", function( data ) {
+           console.log(data);
+        });*/
+        var obj = {"date_debut": "2021-03-14", "date_fin" : "2021-03-21", "sexe" : "M"};
+
+        $.ajax({
+            type: "POST",
+            url: "./bed-available",
+            data: {
+                json: JSON.stringify(obj)
+            },
+            success: function (response) {
+                //service.php response
+                console.log(response);
+            }
+        });
+
+        $("form :input").change(function() {
+            var obj = {
+                "date_debut" : "14-03-2021",
+                "date_fin" : "20-03-2021",
+                "sexe"     :  "Female"
+            };
+            // var obj = {"date_debut": "2021-03-14", "date_fin" : "2021-03-21", "sexe" : "M"};
+
+            $.ajax({
+                type: "POST",
+                url: "./bed-available",
+                data: {
+                    json: JSON.stringify(obj)
+                },
+                success: function (response) {
+                    //service.php response
+                    console.log(response);
+                    $('#reservation_bed').empty();
+                    response.forEach(function(option) {
+                        $('#reservation_bed').append($('<option>', option));
+                    });
+
+
+
+                }
+            });
+        });
+
+    });
+</script>
+{% endblock %}

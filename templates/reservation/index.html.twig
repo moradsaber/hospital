@@ -9,10 +9,12 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Sexe</th>
+                <th>Gender</th>
                 <th>ReservedAt</th>
                 <th>LeaveAt</th>
                 <th>Status</th>
+                <th>Room</th>
+                <th>Bed</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,6 +26,8 @@
                 <td>{{ reservation.reservedAt ? reservation.reservedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ reservation.leaveAt ? reservation.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ reservation.status }}</td>
+                <td>{{ reservation.bed.room.label }}</td>
+                <td>{{ reservation.bed.postion }}</td>
                 <td>
                     <a href="{{ path('reservation_show', {'id': reservation.id}) }}">show</a>
                     <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">edit</a>

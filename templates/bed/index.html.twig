@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Postion</th>
+                <th>Room</th>
+                <th>Type</th>
                 <th>IsOperationel</th>
                 <th>Commentaire</th>
                 <th>actions</th>
@@ -20,6 +22,8 @@
             <tr>
                 <td>{{ bed.id }}</td>
                 <td>{{ bed.postion }}</td>
+                <td>{{ bed.room.label }}</td>
+                <td>{{ bed.room.roomType }}</td>
                 <td>{{ bed.isOperationel ? 'Yes' : 'No' }}</td>
                 <td>{{ bed.commentaire }}</td>
                 <td>

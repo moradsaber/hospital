@@ -44,9 +44,15 @@ class Service
      */
     private $rooms;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="service")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->rooms = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,5 +141,32 @@ class Service
     public function __toString(): ?string
     {
         return $this->getLabel();
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeService($this);
+        }
+
+        return $this;
     }
 }

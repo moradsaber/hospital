@@ -37,7 +37,12 @@ class BedRepository extends ServiceEntityRepository
                 WHERE b.id Not IN (
                     SELECT r.bed_id
                     FROM reservation as r
-                    WHERE r.reserved_at NOT BETWEEN  '" . $dateDebut . "' AND '" . $dateFin . "'
+                          /* 15/03/2021 */                            /* 19/03/2021 */
+                          /* 16/03/2021 */                            /* 18/03/2021 */
+                          /* 17/03/2021 */                            /* 19/03/2021 */
+                    WHERE r.reserved_at >=  '" . $dateDebut . "' or r.leave_at >= '" . $dateFin . "'
+                         /* 18/03/2021 */                            /* 18/03/2021 */
+
                     )";
         $stmt = $conn->prepare($sql);
         $stmt->execute();

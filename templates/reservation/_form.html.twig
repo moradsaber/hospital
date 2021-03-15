@@ -11,16 +11,17 @@
      /*   $.post( "{{ path('reservation_Avalaible_Beds') }}", function( data ) {
            console.log(data);
         });*/
-        var obj = {"date_debut": "2021-03-14", "date_fin" : "2021-03-21", "sexe" : "M"};
 
         $.ajax({
             type: "POST",
             url:  "{{ path('reservation_Avalaible_Beds') }}",
             data: {
-
-                "date_debut": "2021-03-20",
-                "date_fin": "2021-03-20",
-                "sexe" : "M"
+                // "date_debut": "2021-03-20",
+                // "date_fin": "2021-03-20",
+                // "sexe" : "M"
+                "date_debut": $("#reservation_reservedAt").val(),
+                "date_fin": $("#reservation_leaveAt").val(),
+                "sexe" : $("#reservation_sexe").val()
             },
             success: function (response) {
                 //service.php response
@@ -29,21 +30,21 @@
         });
 
         $("form :input").change(function() {
-            var obj = {
-                "date_debut": "2021-03-20",
-                "date_fin": "2021-03-20",
-                "sexe" : "M"
-            };
-            // var obj = {"date_debut": "2021-03-14", "date_fin" : "2021-03-21", "sexe" : "M"};
-
+            // var dateStart = $("#reservation_reservedAt").val();
+            // var dateEnd = $("#reservation_leaveAt").val();
+            // var sexe = $("#reservation_sexe").val();
+            //
+            // console.log(dateStart,dateEnd,sexe);
+            // console.log(dateEnd);
+            // console.log(sexe);
             $.ajax({
                 type: "POST",
                 url:  "{{ path('reservation_Avalaible_Beds') }}",
                 data: {
 
-                        "date_debut": "2021-03-20",
-                        "date_fin": "2021-03-20",
-                        "sexe" : "M"
+                        "date_debut": $("#reservation_reservedAt").val(),
+                        "date_fin": $("#reservation_leaveAt").val(),
+                        "sexe" : $("#reservation_sexe").val()
                     }
                ,
                 success: function (response) {

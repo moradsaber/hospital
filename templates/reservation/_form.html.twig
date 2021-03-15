@@ -15,9 +15,12 @@
 
         $.ajax({
             type: "POST",
-            url: "./bed-available",
+            url:  "{{ path('reservation_Avalaible_Beds') }}",
             data: {
-                json: JSON.stringify(obj)
+
+                "date_debut": "2021-03-20",
+                "date_fin": "2021-03-20",
+                "sexe" : "M"
             },
             success: function (response) {
                 //service.php response
@@ -27,18 +30,22 @@
 
         $("form :input").change(function() {
             var obj = {
-                "date_debut" : "14-03-2021",
-                "date_fin" : "20-03-2021",
-                "sexe"     :  "Female"
+                "date_debut": "2021-03-20",
+                "date_fin": "2021-03-20",
+                "sexe" : "M"
             };
             // var obj = {"date_debut": "2021-03-14", "date_fin" : "2021-03-21", "sexe" : "M"};
 
             $.ajax({
                 type: "POST",
-                url: "./bed-available",
+                url:  "{{ path('reservation_Avalaible_Beds') }}",
                 data: {
-                    json: JSON.stringify(obj)
-                },
+
+                        "date_debut": "2021-03-20",
+                        "date_fin": "2021-03-20",
+                        "sexe" : "M"
+                    }
+               ,
                 success: function (response) {
                     //service.php response
                     console.log(response);

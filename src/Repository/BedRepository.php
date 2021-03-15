@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Bed;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -25,22 +24,21 @@ class BedRepository extends ServiceEntityRepository
 
     public function findByAvailableBeds($params)
     {
-        dd($params);
-        $dateFin = strtotime($params->date_fin);
+        $dateFin = strtotime($params['date_fin']);
         $dateFin =date('Y-m-d', $dateFin);
 
-        $dateDebut = strtotime($params->date_debut);
+        $dateDebut = strtotime($params['date_debut']);
         $dateDebut =date('Y-m-d', $dateDebut);
 
         $conn = $this->getEntityManager()
             ->getConnection();
-        $sql = "SELECT *
-                        FROM bed as b
-                        where b.id Not IN (
-                            SELECT r.bed_id
-                            FROM reservation as r
-                            WHERE r.reserved_at NOT BETWEEN  '".$dateDebut."' AND '".$dateFin."'
-                            )";
+        $sql = "SELECT * 
+                FROM bed as b
+                WHERE b.id Not IN (
+                    SELECT r.bed_id
+                    FROM reservation as r
+                    WHERE r.reserved_at NOT BETWEEN  '" . $dateDebut . "' AND '" . $dateFin . "'
+                    )";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAllAssociative();

@@ -59,48 +59,22 @@ class ReservationController extends AbstractController
      */
     public function availableBeds(Request $request): Response
     {
-
-        $params = json_decode($request->getContent());
+       // dd($request->request->all());
+        $params = $request->request->all();//json_decode($request->getContent());
 //        dd($params);
         // {"date_debut": "2021-03-14", "date_fin" : "2021-03-21", "sexe" : "M"}
         // faire une requete sql qui retourne la liste des bed disponible en se basant sur les parmetres envoyes
        // faire une requet sql pour afficher les dernier
         $data=$this->getDoctrine()->getRepository(Bed::class)->findByAvailableBeds($params);
-//      dd($data);
         $arr= array();
         foreach ($data as $item){
         $arr[]= [
-            "id" => $item['id'],
-            "value" => $item['postion'],
+            "value" => $item['id'],
+            "text" => $item['postion'],
             ];
         }
-//        dd($arr);
-        return new JsonResponse($arr
-//            [
-//                [
-//                    'value' => random_int(1, 10),
-//                    'text' => '225-fenetre' . random_int(1, 10)
-//                ],
-//                [
-//                    'value' => random_int(1, 10),
-//                    'text' => '226-porte' . random_int(1, 10)
-//                ],
-//                [
-//                    'value' => random_int(1, 10),
-//                    'text' => '226-fenetre' . random_int(1, 10)
-//                ],
-//                [
-//                    'value' => random_int(1, 10),
-//                    'text' => '227-fenetre' . random_int(1, 10)
-//                ],
-//                [
-//                    'value' => random_int(1, 10),
-//                    'text' => '228-porte' . random_int(1, 10)
-//                ],
-//            ]
-        );
 
-        //return  new JsonResponse([$params]);
+        return new JsonResponse($arr);
     }
 
     /**
